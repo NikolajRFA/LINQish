@@ -2,6 +2,7 @@
 #define ITERABLE_HPP
 
 #include <list>
+#include <functional>
 
 template<typename T>
 using predicate_t = std::function<bool(const T&)>;
