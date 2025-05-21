@@ -15,7 +15,7 @@ void tearDown()
     // clean stuff up here
 }
 
-void filter_test() {
+void any_listOfNumbers0to9_numberIsOver5IsTrue() {
     std::list<int> list;
     for (int i = 0; i < 10; i++) {
         list.push_back(i);
@@ -34,7 +34,7 @@ void filter_test() {
 int runUnityTests()
 {
     UNITY_BEGIN();
-    RUN_TEST(filter_test);
+    RUN_TEST(any_listOfNumbers0to9_numberIsOver5IsTrue);
     return UNITY_END();
 }
 

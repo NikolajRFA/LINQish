@@ -36,4 +36,18 @@ std::list<TResult> map(std::list<TSource> list, const mapper_t<TSource, TResult>
     return result;
 }
 
+template<typename T>
+bool any(std::list<T> list, const predicate_t<T>& predicate)
+{
+    for (const auto& item : list)
+    {
+        if (predicate(item))
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 #endif // ITERABLE_HPP
