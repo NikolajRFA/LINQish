@@ -4,8 +4,8 @@
 #include "iterable.hpp"
 #include "unity.h"
 #include <string>
-#include "animal.hpp"
-#include "pet.hpp"
+#include "../../animal.hpp"
+#include "../../pet.hpp"
 
 void setUp()
 {
@@ -39,7 +39,7 @@ void map_listOfStrings_listOfSubstrings()
 
 void map_listOfAnimals_listOfPets()
 {
-    std::list<Animal> animalList = {Animal("Zazu", "bird", 9), Animal("Kira", "bird", 9)};
+    std::list<Animal> animalList = {Animal("Sasu", "bird", 9), Animal("Kira", "bird", 9)};
 
     std::list<Pet> petList = map<Animal, Pet>(animalList, [](const Animal &animal) { return Pet(animal.name, animal.species, animal.age, "Selin"); });
 
