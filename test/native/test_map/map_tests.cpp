@@ -41,7 +41,7 @@ void map_listOfAnimals_listOfPets()
 {
     std::list<Animal> animalList = {Animal("Zazu", "bird", 9), Animal("Kira", "bird", 9)};
 
-    std::list<Pet> petList = map<Pet, Animal>(animalList, [](const Animal &animal) { return Pet(animal.name, animal.species, animal.age, "Selin"); });
+    std::list<Pet> petList = map<Animal, Pet>(animalList, [](const Animal &animal) { return Pet(animal.name, animal.species, animal.age, "Selin"); });
 
     TEST_ASSERT_EQUAL_STRING("Selin", petList.front().ownerName.c_str());
     petList.pop_front();
