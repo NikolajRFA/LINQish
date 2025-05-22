@@ -64,4 +64,23 @@ bool all(std::list<T> list, const predicate_t<T>& predicate)
     return true;
 }
 
+template<typename T>
+T* first(std::list<T>& list, const predicate_t<T> predicate = nullptr)
+{
+    if (!predicate)
+    {
+        return list.empty() ? nullptr : &list.front();
+    }
+
+    for (auto& item : list)
+    {
+        if (predicate(item))
+        {
+            return &item;
+        }
+    }
+
+    return nullptr;
+}
+
 #endif // ITERABLE_HPP
