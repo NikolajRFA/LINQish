@@ -15,7 +15,7 @@ void tearDown()
     // clean stuff up here
 }
 
-void any_listOfNumbers0to9_numberIsOver5IsTrue() {
+void any_listOfNumbers0to9_numberIsOver5_True() {
     std::list<int> list;
     for (int i = 0; i < 10; i++) {
         list.push_back(i);
@@ -26,7 +26,7 @@ void any_listOfNumbers0to9_numberIsOver5IsTrue() {
     TEST_ASSERT_EQUAL_INT(1, result);
 }
 
-void any_listOfAnimals_anyIsCalledKiraIsTrue()
+void any_listOfAnimals_anyIsCalledKira_True()
 {
     std::list<Animal> animals = { Animal("Kira", "bird", 9), Animal("Sasu", "bird", 9) };
 
@@ -38,8 +38,8 @@ void any_listOfAnimals_anyIsCalledKiraIsTrue()
 int runUnityTests()
 {
     UNITY_BEGIN();
-    RUN_TEST(any_listOfNumbers0to9_numberIsOver5IsTrue);
-    RUN_TEST(any_listOfAnimals_anyIsCalledKiraIsTrue);
+    RUN_TEST(any_listOfNumbers0to9_numberIsOver5_True);
+    RUN_TEST(any_listOfAnimals_anyIsCalledKira_True);
     return UNITY_END();
 }
 

@@ -1,0 +1,72 @@
+//
+// Created by nrfad on 22-05-2025.
+//
+#include "iterable.hpp"
+#include "unity.h"
+#include "../../animal.hpp"
+
+void setUp()
+{
+    // set stuff up here
+}
+
+void tearDown()
+{
+    // clean stuff up here
+}
+
+void all_listOfNumbers0to9AllNumbersAreOver5_False() {
+    std::list<int> list;
+    for (int i = 0; i < 10; i++) {
+        list.push_back(i);
+    }
+
+    bool result = all<int>(list, [](const int& x){ return x > 5; });
+
+    TEST_ASSERT_EQUAL_INT(0, result);
+}
+
+void all_listOfAnimalsAllAreCalledKira_False()
+{
+    std::list<Animal> animals = { Animal("Kira", "bird", 9), Animal("Sasu", "bird", 9) };
+
+    bool result = all<Animal>(animals, [](const Animal& animal){ return animal.name == "Kira"; });
+
+    TEST_ASSERT_EQUAL_INT(0, result);
+}
+
+void all_listOfAnimalsAllAreBirds_True()
+{
+    std::list<Animal> animals = { Animal("Kira", "bird", 9), Animal("Sasu", "bird", 9) };
+
+    bool result = all<Animal>(animals, [](const Animal& animal){ return animal.species == "bird"; });
+
+    TEST_ASSERT_EQUAL_INT(1, result);
+}
+
+void all_listOfIntegersAllAreOver5_True()
+{
+    std::list<int> integers = { 6, 7, 8, 9, 10 };
+
+    bool result = all<int>(integers, [](const int& x){ return x > 5; });
+
+    TEST_ASSERT_EQUAL_INT(1, result);
+}
+
+int runUnityTests()
+{
+    UNITY_BEGIN();
+    RUN_TEST(all_listOfNumbers0to9AllNumbersAreOver5_False);
+    RUN_TEST(all_listOfAnimalsAllAreCalledKira_False);
+    RUN_TEST(all_listOfAnimalsAllAreBirds_True);
+    RUN_TEST(all_listOfIntegersAllAreOver5_True);
+    return UNITY_END();
+}
+
+/**
+ * For Arduino framework
+ */
+int main()
+{
+    return runUnityTests();
+}
