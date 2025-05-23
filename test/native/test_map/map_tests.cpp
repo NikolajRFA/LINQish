@@ -1,7 +1,9 @@
 //
 // Created by nrfad on 16-05-2025.
 //
-#include "iterable.hpp"
+#include <list>
+#include <functional>
+#include "linqish.h"
 #include "unity.h"
 #include <string>
 #include "../../animal.hpp"
@@ -19,29 +21,29 @@ void tearDown()
 
 void map_listOfStrings_listOfSubstrings()
 {
-    std::list<std::string> list = {"aaaaa", "bbbbb", "ccccc", "ddddd", "eeeee"};
+    LINQish<std::string> list = {"aaaaa", "bbbbb", "ccccc", "ddddd", "eeeee"};
 
-    list = map<std::string, std::string>(list, [](const std::string &s)
-                                         { return s.substr(0, 3); });
+    std::list<std::string> mappedList = list.map<std::string>([](const std::string &s)
+                                         { return s.substr(0, 3); }).toList();
 
-    TEST_ASSERT_EQUAL_STRING("aaa", list.front().c_str());
-    list.pop_front();
-    TEST_ASSERT_EQUAL_STRING("bbb", list.front().c_str());
-    list.pop_front();
-    TEST_ASSERT_EQUAL_STRING("ccc", list.front().c_str());
-    list.pop_front();
-    TEST_ASSERT_EQUAL_STRING("ddd", list.front().c_str());
-    list.pop_front();
-    TEST_ASSERT_EQUAL_STRING("eee", list.front().c_str());
-    list.pop_front();
-    TEST_ASSERT_EQUAL_INT(0, list.size());
+    TEST_ASSERT_EQUAL_STRING("aaa", mappedList.front().c_str());
+    mappedList.pop_front();
+    TEST_ASSERT_EQUAL_STRING("bbb", mappedList.front().c_str());
+    mappedList.pop_front();
+    TEST_ASSERT_EQUAL_STRING("ccc", mappedList.front().c_str());
+    mappedList.pop_front();
+    TEST_ASSERT_EQUAL_STRING("ddd", mappedList.front().c_str());
+    mappedList.pop_front();
+    TEST_ASSERT_EQUAL_STRING("eee", mappedList.front().c_str());
+    mappedList.pop_front();
+    TEST_ASSERT_EQUAL_INT(0, mappedList.size());
 }
 
 void map_listOfAnimals_listOfPets()
 {
-    std::list<Animal> animalList = {Animal("Sasu", "bird", 9), Animal("Kira", "bird", 9)};
+    LINQish<Animal> animalList = { Animal("Sasu", "bird", 9), Animal("Kira", "bird", 9) };
 
-    std::list<Pet> petList = map<Animal, Pet>(animalList, [](const Animal &animal) { return Pet(animal.name, animal.species, animal.age, "Selin"); });
+    std::list<Pet> petList = animalList.map<Pet>([](const Animal &animal) { return Pet(animal.name, animal.species, animal.age, "Selin"); }).toList();
 
     TEST_ASSERT_EQUAL_STRING("Selin", petList.front().ownerName.c_str());
     petList.pop_front();

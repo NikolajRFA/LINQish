@@ -25,18 +25,6 @@ std::list<T> filter(std::list<T> list, const predicate_t<T> &predicate)
     return result;
 }
 
-template <typename TSource, typename TResult>
-std::list<TResult> map(std::list<TSource> list, const mapper_t<TSource, TResult> &mapper)
-{
-    std::list<TResult> result;
-    for (const auto &item : list)
-    {
-        result.push_back(mapper(item));
-    }
-
-    return result;
-}
-
 template <typename T>
 bool any(std::list<T> list, const predicate_t<T> &predicate)
 {
