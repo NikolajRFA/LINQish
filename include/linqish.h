@@ -22,7 +22,7 @@ public:
         return data;
     }
 
-    LINQish<T>& filter(const predicate_t<T> &predicate)
+    LINQish<T> filter(const predicate_t<T> &predicate)
     {
         std::list<T> result;
         for (const auto &item : data)

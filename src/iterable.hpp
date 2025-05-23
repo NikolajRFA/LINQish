@@ -11,21 +11,6 @@ template <typename TSource, typename TResult>
 using mapper_t = std::function<TResult(const TSource &)>;
 
 template <typename T>
-std::list<T> filter(std::list<T> list, const predicate_t<T> &predicate)
-{
-    std::list<T> result;
-    for (const auto &item : list)
-    {
-        if (predicate(item))
-        {
-            result.push_back(item);
-        }
-    }
-
-    return result;
-}
-
-template <typename T>
 bool any(std::list<T> list, const predicate_t<T> &predicate)
 {
     for (const auto &item : list)

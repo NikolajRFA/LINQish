@@ -1,7 +1,9 @@
 ﻿//
 // Created by nrfad on 16-05-2025.
 //
-#include "iterable.hpp"
+#include <list>
+#include <functional>
+#include "linqish.h"
 #include "unity.h"
 
 
@@ -16,19 +18,20 @@ void tearDown()
 }
 
 void any_listOfNumbers0to9_numberIsOver5IsTrue() {
-    std::list<int> list;
+    std::list<int> initList;
     for (int i = 0; i < 10; i++) {
-        list.push_back(i);
+        initList.push_back(i);
     }
+    LINQish<int> list(initList);
 
-    list = filter<int>(list, [](const int& x) {return x > 4;});
+    auto resultList = list.filter([](const int& x) { return x > 4;} ).toList();
 
     for (int i = 5; i < 10; i++) 
     {
-        TEST_ASSERT_EQUAL_INT(i, list.front());
-        list.pop_front();
+        TEST_ASSERT_EQUAL_INT(i, resultList.front());
+        resultList.pop_front();
     }
-    TEST_ASSERT_EQUAL_INT(0, list.size());
+    TEST_ASSERT_EQUAL_INT(0, resultList.size());
 }
 
 int runUnityTests()
