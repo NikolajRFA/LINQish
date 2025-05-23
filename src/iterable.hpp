@@ -11,25 +11,6 @@ template <typename TSource, typename TResult>
 using mapper_t = std::function<TResult(const TSource &)>;
 
 template <typename T>
-T *first(std::list<T> &list, const predicate_t<T> predicate = nullptr)
-{
-    if (!predicate)
-    {
-        return list.empty() ? nullptr : &list.front();
-    }
-
-    for (auto &item : list)
-    {
-        if (predicate(item))
-        {
-            return &item;
-        }
-    }
-
-    return nullptr;
-}
-
-template <typename T>
 T *last(std::list<T> &list, const predicate_t<T> predicate = nullptr)
 {
     if (!predicate)
