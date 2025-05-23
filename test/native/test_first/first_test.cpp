@@ -55,6 +55,15 @@ void first_listOfAnimalsAndPredicate_nullptr()
     TEST_ASSERT_NULL(firstAnimal);
 }
 
+void first_emptyList_nullptr()
+{
+    std::list<int> integers = {};
+
+    int* firstInt = first<int>(integers);
+
+    TEST_ASSERT_NULL(firstInt);
+}
+
 int runUnityTests()
 {
     UNITY_BEGIN();
@@ -62,6 +71,7 @@ int runUnityTests()
     RUN_TEST(first_listOfAnimals_returnsFirstAnimal);
     RUN_TEST(first_listOfAnimalsAndPredicate_returnsFirstAnimalFittingPredicate);
     RUN_TEST(first_listOfAnimalsAndPredicate_nullptr);
+    RUN_TEST(first_emptyList_nullptr);
     return UNITY_END();
 }
 
