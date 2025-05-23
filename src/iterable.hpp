@@ -25,20 +25,6 @@ bool any(std::list<T> list, const predicate_t<T> &predicate)
 }
 
 template <typename T>
-bool all(std::list<T> list, const predicate_t<T> &predicate)
-{
-    for (const auto &item : list)
-    {
-        if (!predicate(item))
-        {
-            return false;
-        }
-    }
-
-    return true;
-}
-
-template <typename T>
 T *first(std::list<T> &list, const predicate_t<T> predicate = nullptr)
 {
     if (!predicate)
