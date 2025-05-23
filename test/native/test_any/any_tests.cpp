@@ -1,7 +1,9 @@
 //
 // Created by nrfad on 21-05-2025.
 //
-#include "iterable.hpp"
+#include <list>
+#include <functional>
+#include "linqish.h"
 #include "unity.h"
 #include "../../animal.hpp"
 
@@ -16,21 +18,22 @@ void tearDown()
 }
 
 void any_listOfNumbers0to9_numberIsOver5_True() {
-    std::list<int> list;
+    std::list<int> initList;
     for (int i = 0; i < 10; i++) {
-        list.push_back(i);
+        initList.push_back(i);
     }
+    LINQish<int> list(initList);
 
-    bool result = any<int>(list, [](const int& x){ return x > 5; });
+    bool result = list.any([](const int& x){ return x > 5; });
 
     TEST_ASSERT_EQUAL_INT(1, result);
 }
 
 void any_listOfAnimals_anyIsCalledKira_True()
 {
-    std::list<Animal> animals = { Animal("Kira", "bird", 9), Animal("Sasu", "bird", 9) };
+    LINQish<Animal> animals = { Animal("Kira", "bird", 9), Animal("Sasu", "bird", 9) };
 
-    bool result = any<Animal>(animals, [](const Animal& animal){ return animal.name == "Kira"; });
+    bool result = animals.any([](const Animal& animal){ return animal.name == "Kira"; });
 
     TEST_ASSERT_EQUAL_INT(1, result);
 }

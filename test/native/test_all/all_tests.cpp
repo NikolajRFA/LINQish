@@ -1,7 +1,9 @@
 //
 // Created by nrfad on 22-05-2025.
 //
-#include "iterable.hpp"
+#include <list>
+#include <functional>
+#include "linqish.h"
 #include "unity.h"
 #include "../../animal.hpp"
 
@@ -16,39 +18,40 @@ void tearDown()
 }
 
 void all_listOfNumbers0to9AllNumbersAreOver5_False() {
-    std::list<int> list;
+    std::list<int> initList;
     for (int i = 0; i < 10; i++) {
-        list.push_back(i);
+        initList.push_back(i);
     }
+    LINQish<int> list(initList);
 
-    bool result = all<int>(list, [](const int& x){ return x > 5; });
+    bool result = list.all([](const int& x){ return x > 5; });
 
     TEST_ASSERT_EQUAL_INT(0, result);
 }
 
 void all_listOfAnimalsAllAreCalledKira_False()
 {
-    std::list<Animal> animals = { Animal("Kira", "bird", 9), Animal("Sasu", "bird", 9) };
+    LINQish<Animal> animals = { Animal("Kira", "bird", 9), Animal("Sasu", "bird", 9) };
 
-    bool result = all<Animal>(animals, [](const Animal& animal){ return animal.name == "Kira"; });
+    bool result = animals.all([](const Animal& animal){ return animal.name == "Kira"; });
 
     TEST_ASSERT_EQUAL_INT(0, result);
 }
 
 void all_listOfAnimalsAllAreBirds_True()
 {
-    std::list<Animal> animals = { Animal("Kira", "bird", 9), Animal("Sasu", "bird", 9) };
+    LINQish<Animal> animals = { Animal("Kira", "bird", 9), Animal("Sasu", "bird", 9) };
 
-    bool result = all<Animal>(animals, [](const Animal& animal){ return animal.species == "bird"; });
+    bool result = animals.all([](const Animal& animal){ return animal.species == "bird"; });
 
     TEST_ASSERT_EQUAL_INT(1, result);
 }
 
 void all_listOfIntegersAllAreOver5_True()
 {
-    std::list<int> integers = { 6, 7, 8, 9, 10 };
+    LINQish<int> integers = { 6, 7, 8, 9, 10 };
 
-    bool result = all<int>(integers, [](const int& x){ return x > 5; });
+    bool result = integers.all([](const int& x){ return x > 5; });
 
     TEST_ASSERT_EQUAL_INT(1, result);
 }

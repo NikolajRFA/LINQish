@@ -1,7 +1,9 @@
 //
 // Created by nrfad on 23-05-2025.
 //
-#include "iterable.hpp"
+#include <list>
+#include <functional>
+#include "linqish.h"
 #include "unity.h"
 #include "../../animal.hpp"
 
@@ -17,18 +19,18 @@ void tearDown()
 
 void last_listOfIntegers_returnsLastInteger()
 {
-    std::list<int> integers = { 1, 2, 3 };
+    LINQish<int> integers = { 1, 2, 3 };
 
-    int* lastInteger = last<int>(integers);
+    int* lastInteger = integers.last();
 
     TEST_ASSERT_EQUAL_INT(3, *lastInteger);
 }
 
 void last_listOfAnimals_returnsLastAnimal()
 {
-    std::list<Animal> animals = { Animal("Kira", "bird", 9), Animal("Sasu", "bird", 9) };
+    LINQish<Animal> animals = { Animal("Kira", "bird", 9), Animal("Sasu", "bird", 9) };
 
-    Animal* lastAnimal = last<Animal>(animals);
+    Animal* lastAnimal = animals.last();
 
     TEST_ASSERT_EQUAL_STRING("Sasu", lastAnimal->name.c_str());
     TEST_ASSERT_EQUAL_STRING("bird", lastAnimal->species.c_str());
@@ -37,9 +39,9 @@ void last_listOfAnimals_returnsLastAnimal()
 
 void last_listOfAnimalsAndPredicate_returnsLastAnimalFittingPredicate()
 {
-    std::list<Animal> animals = { Animal("Kira", "bird", 9), Animal("Sasu", "bird", 9) };
+    LINQish<Animal> animals = { Animal("Kira", "bird", 9), Animal("Sasu", "bird", 9) };
 
-    Animal* lastAnimal = last<Animal>(animals, [](const Animal& animal){ return animal.name == "Kira"; });
+    Animal* lastAnimal = animals.last([](const Animal& animal){ return animal.name == "Kira"; });
 
     TEST_ASSERT_EQUAL_STRING("Kira", lastAnimal->name.c_str());
     TEST_ASSERT_EQUAL_STRING("bird", lastAnimal->species.c_str());
@@ -48,18 +50,18 @@ void last_listOfAnimalsAndPredicate_returnsLastAnimalFittingPredicate()
 
 void last_listofAnimalsAndPredicate_nullptr()
 {
-    std::list<Animal> animals = { Animal("Kira", "bird", 9), Animal("Sasu", "bird", 9) };
+    LINQish<Animal> animals = { Animal("Kira", "bird", 9), Animal("Sasu", "bird", 9) };
 
-    Animal* lastAnimal = last<Animal>(animals, [](const Animal& animal){ return animal.species == "dog"; });
+    Animal* lastAnimal = animals.last([](const Animal& animal){ return animal.species == "dog"; });
 
     TEST_ASSERT_NULL(lastAnimal);
 }
 
 void last_emptyList_nullptr()
 {
-    std::list<int> integers = {};
+    LINQish<int> integers = {};
 
-    int* lastInt = last<int>(integers);
+    int* lastInt = integers.last();
 
     TEST_ASSERT_NULL(lastInt);
 }

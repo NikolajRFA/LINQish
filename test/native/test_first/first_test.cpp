@@ -1,7 +1,9 @@
 //
 // Created by nrfad on 23-05-2025.
 //
-#include "iterable.hpp"
+#include <list>
+#include <functional>
+#include "linqish.h"
 #include "unity.h"
 #include "../../animal.hpp"
 
@@ -17,18 +19,18 @@ void tearDown()
 
 void first_listOfIntegers_returnsFirstInteger()
 {
-    std::list<int> list = { 1, 2, 3 };
+    LINQish<int> list = { 1, 2, 3 };
 
-    int* firstInteger = first<int>(list);
+    int* firstInteger = list.first();
 
     TEST_ASSERT_EQUAL_INT(1, *firstInteger);
 }
 
 void first_listOfAnimals_returnsFirstAnimal()
 {
-    std::list<Animal> animals = { Animal("Kira", "bird", 9), Animal("Sasu", "bird", 9) };
+    LINQish<Animal> animals = { Animal("Kira", "bird", 9), Animal("Sasu", "bird", 9) };
 
-    Animal* firstAnimal = first<Animal>(animals);
+    Animal* firstAnimal = animals.first();
 
     TEST_ASSERT_EQUAL_STRING("Kira", firstAnimal->name.c_str());
     TEST_ASSERT_EQUAL_STRING("bird", firstAnimal->species.c_str());
@@ -37,9 +39,9 @@ void first_listOfAnimals_returnsFirstAnimal()
 
 void first_listOfAnimalsAndPredicate_returnsFirstAnimalFittingPredicate()
 {
-    std::list<Animal> animals = { Animal("Kira", "bird", 9), Animal("Sasu", "bird", 9) };
+    LINQish<Animal> animals = { Animal("Kira", "bird", 9), Animal("Sasu", "bird", 9) };
 
-    Animal* firstAnimal = first<Animal>(animals, [](const Animal& animal){ return animal.name == "Sasu"; });
+    Animal* firstAnimal = animals.first([](const Animal& animal){ return animal.name == "Sasu"; });
 
     TEST_ASSERT_EQUAL_STRING("Sasu", firstAnimal->name.c_str());
     TEST_ASSERT_EQUAL_STRING("bird", firstAnimal->species.c_str());
@@ -48,18 +50,18 @@ void first_listOfAnimalsAndPredicate_returnsFirstAnimalFittingPredicate()
 
 void first_listOfAnimalsAndPredicate_nullptr()
 {
-    std::list<Animal> animals = { Animal("Kira", "bird", 9), Animal("Sasu", "bird", 9) };
+    LINQish<Animal> animals = { Animal("Kira", "bird", 9), Animal("Sasu", "bird", 9) };
 
-    Animal* firstAnimal = first<Animal>(animals, [](const Animal& animal){ return animal.species == "dog"; });
+    Animal* firstAnimal = animals.first([](const Animal& animal){ return animal.species == "dog"; });
 
     TEST_ASSERT_NULL(firstAnimal);
 }
 
 void first_emptyList_nullptr()
 {
-    std::list<int> integers = {};
+    LINQish<int> integers = {};
 
-    int* firstInt = first<int>(integers);
+    int* firstInt = integers.first();
 
     TEST_ASSERT_NULL(firstInt);
 }
