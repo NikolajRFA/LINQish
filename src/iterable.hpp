@@ -11,20 +11,6 @@ template <typename TSource, typename TResult>
 using mapper_t = std::function<TResult(const TSource &)>;
 
 template <typename T>
-bool any(std::list<T> list, const predicate_t<T> &predicate)
-{
-    for (const auto &item : list)
-    {
-        if (predicate(item))
-        {
-            return true;
-        }
-    }
-
-    return false;
-}
-
-template <typename T>
 T *first(std::list<T> &list, const predicate_t<T> predicate = nullptr)
 {
     if (!predicate)
