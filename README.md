@@ -1,0 +1,68 @@
+# LINQish - Fluent Query Utilities for C++
+
+LINQish is a **modern, expressive library** that brings LINQ-style operations to C++ lists, allowing developers to write cleaner, more functional-style queries.
+
+## ✨ Features
+- 🔍 **Fluent-style chaining** for operations like `filter`, `map`, and `any`
+- 📜 **Intuitive, readable syntax** inspired by C# LINQ
+- 🚀 **Efficient list transformations** using the power of C++
+- 💡 **Supports functional programming concepts** with lambdas
+- ✅ **Seamless list manipulation** for cleaner, more expressive code
+
+## 🔗 Example Usage
+
+```cpp
+#include "linqish.h"
+#include <iostream>
+
+int main() {
+    LINQish<int> numbers = {1, 2, 3, 4, 5};
+
+    auto result = numbers.filter([](int x) { return x % 2 == 0; })
+                         .map([](int x) { return x * 10; })
+                         .toList();
+
+    for (const auto& num : result) {
+        std::cout << num << " ";  // Output: 20 40
+    }
+
+    return 0;
+}
+```
+## 📦 Installation
+Simply include `linqish.h`in your project:
+```bash
+git clone https://github.com/NikolajRFA/LINQish.git
+```
+Then include the header file:
+```cpp
+#include "linqish.h"
+```
+## 📜 Available Methods
+| Method  | Description |
+|---------|-------------|
+| `filter(predicate)` | Returns a filtered list based on the given condition |
+| `map(transformer)` | Applies a function to each element and returns a transformed list |
+| `any(predicate)` | Checks if any element matches a condition |
+| `all(predicate)` | Checks if all elements satisfy a condition |
+| `first(predicate)` | Gets the first matching element |
+| `last(predicate)` | Gets the last matching element |
+
+## 🤝 Contributing
+
+We welcome contributions! If you would like to improve LINQish, follow these steps:
+
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature-branch`).
+3. Make your changes and commit them (`git commit -m "Description of changes"`).
+4. Push to your branch (`git push origin feature-branch`).
+5. Open a pull request and describe your changes.
+
+Feel free to open issues for bug reports, feature requests, or general improvements!
+
+## 📜 License
+
+This project is licensed under the **MIT License**. You are free to use, modify, and distribute it, provided that proper credit is given.
+
+See the full license text in the [`LICENSE`](LICENSE) file.
+
