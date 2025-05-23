@@ -4,16 +4,17 @@
 #include <list>
 #include <functional>
 
-template<typename T>
-using predicate_t = std::function<bool(const T&)>;
+template <typename T>
+using predicate_t = std::function<bool(const T &)>;
 
-template<typename TSource, typename TResult>
-using mapper_t = std::function<TResult(const TSource&)>;
+template <typename TSource, typename TResult>
+using mapper_t = std::function<TResult(const TSource &)>;
 
-template<typename T>
-std::list<T> filter(std::list<T> list, const predicate_t<T>& predicate) {
+template <typename T>
+std::list<T> filter(std::list<T> list, const predicate_t<T> &predicate)
+{
     std::list<T> result;
-    for (const auto& item : list)
+    for (const auto &item : list)
     {
         if (predicate(item))
         {
@@ -24,11 +25,11 @@ std::list<T> filter(std::list<T> list, const predicate_t<T>& predicate) {
     return result;
 }
 
-template<typename TSource, typename TResult>
-std::list<TResult> map(std::list<TSource> list, const mapper_t<TSource, TResult>& mapper)
+template <typename TSource, typename TResult>
+std::list<TResult> map(std::list<TSource> list, const mapper_t<TSource, TResult> &mapper)
 {
     std::list<TResult> result;
-    for (const auto& item : list)
+    for (const auto &item : list)
     {
         result.push_back(mapper(item));
     }
@@ -36,10 +37,10 @@ std::list<TResult> map(std::list<TSource> list, const mapper_t<TSource, TResult>
     return result;
 }
 
-template<typename T>
-bool any(std::list<T> list, const predicate_t<T>& predicate)
+template <typename T>
+bool any(std::list<T> list, const predicate_t<T> &predicate)
 {
-    for (const auto& item : list)
+    for (const auto &item : list)
     {
         if (predicate(item))
         {
@@ -50,10 +51,10 @@ bool any(std::list<T> list, const predicate_t<T>& predicate)
     return false;
 }
 
-template<typename T>
-bool all(std::list<T> list, const predicate_t<T>& predicate)
+template <typename T>
+bool all(std::list<T> list, const predicate_t<T> &predicate)
 {
-    for (const auto& item : list)
+    for (const auto &item : list)
     {
         if (!predicate(item))
         {
@@ -62,6 +63,44 @@ bool all(std::list<T> list, const predicate_t<T>& predicate)
     }
 
     return true;
+}
+
+template <typename T>
+T *first(std::list<T> &list, const predicate_t<T> predicate = nullptr)
+{
+    if (!predicate)
+    {
+        return list.empty() ? nullptr : &list.front();
+    }
+
+    for (auto &item : list)
+    {
+        if (predicate(item))
+        {
+            return &item;
+        }
+    }
+
+    return nullptr;
+}
+
+template <typename T>
+T *last(std::list<T> &list, const predicate_t<T> predicate = nullptr)
+{
+    if (!predicate)
+    {
+        return list.empty() ? nullptr : &list.back();
+    }
+
+    for (auto it = list.rbegin(); it != list.rend(); ++it)
+    {
+        if (predicate(*it))
+        {
+            return &(*it); // Get the address of the element
+        }
+    }
+
+    return nullptr;
 }
 
 #endif // ITERABLE_HPP
