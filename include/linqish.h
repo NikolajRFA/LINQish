@@ -109,6 +109,24 @@ public:
 
         return nullptr;
     }
+
+    LINQish<T> skip(int skip)
+    {
+        std::list<T> result;
+        for (int i = 0; i < data.size(); i++)
+        {
+            if (i < skip)
+            {
+                data.pop_front();
+                continue;
+            }
+
+            result.push_back(data.front());
+            data.pop_front();
+        }
+        
+        return LINQish<T>(result);
+    }
 };
 
 #endif // LINQISH_H
