@@ -17,7 +17,7 @@ void tearDown()
     // clean stuff up here
 }
 
-void skip_listOfIntegersSkip3_RestOfList()
+void skip_listOfIntegersSkip3_restOfList()
 {
     std::list<int> integers = { 1, 2, 3, 4, 5, 6 };
 
@@ -35,7 +35,7 @@ void skip_listOfIntegersSkip3_RestOfList()
 int runUnityTests()
 {
     UNITY_BEGIN();
-    RUN_TEST(skip_listOfIntegersSkip3_RestOfList);
+    RUN_TEST(skip_listOfIntegersSkip3_restOfList);
     return UNITY_END();
 }
 
