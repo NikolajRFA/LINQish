@@ -74,7 +74,7 @@ public:
         return true;
     }
 
-    T* first(const predicate_t<T> &predicate = nullptr)
+    T *first(const predicate_t<T> &predicate = nullptr)
     {
         if (!predicate)
         {
@@ -92,7 +92,7 @@ public:
         return nullptr;
     }
 
-    T* last(const predicate_t<T> &predicate = nullptr)
+    T *last(const predicate_t<T> &predicate = nullptr)
     {
         if (!predicate)
         {
@@ -110,21 +110,22 @@ public:
         return nullptr;
     }
 
-    LINQish<T> skip(int skip)
+    LINQish<T> skip(int count)
     {
         std::list<T> result;
-        for (int i = 0; i < data.size(); i++)
-        {
-            if (i < skip)
-            {
-                data.pop_front();
-                continue;
-            }
 
-            result.push_back(data.front());
-            data.pop_front();
+        auto it = data.begin();
+        for (int i = 0; i < count && it != data.end(); ++i)
+        {
+            ++it;
         }
-        
+
+        while (it != data.end())
+        {
+            result.push_back(*it);
+            ++it;
+        }
+
         return LINQish<T>(result);
     }
 };
