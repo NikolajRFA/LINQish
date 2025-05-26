@@ -56,6 +56,7 @@ void skip_listOfIntegersSkip5_emptyList()
     auto integerList = integers.skip(5).toList();
 
     TEST_ASSERT_EQUAL_INT(1, integerList.empty());
+    TEST_ASSERT_EQUAL_INT(0, integerList.size());
 }
 
 int runUnityTests()
