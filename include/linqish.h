@@ -14,6 +14,7 @@ private:
     std::list<T> data;
 
 public:
+    LINQish() {}
     LINQish(std::initializer_list<T> values) : data(values) {}
     LINQish(std::list<T> values) : data(values) {}
 
@@ -112,7 +113,7 @@ public:
 
     LINQish<T> skip(int count)
     {
-        std::list<T> result;
+        LINQish<T> result;
 
         auto it = data.begin();
         for (int i = 0; i < count && it != data.end(); ++i)
@@ -122,11 +123,25 @@ public:
 
         while (it != data.end())
         {
-            result.push_back(*it);
+            result.data.push_back(*it);
             ++it;
         }
 
-        return LINQish<T>(result);
+        return result;
+    }
+
+    LINQish<T> take(int count)
+    {
+        LINQish<T> result;
+
+        auto it = data.begin();
+        for (int i = 0; i < count && it != data.end(); ++i)
+        {
+            result.data.push_back(*it);
+            ++it;
+        }
+
+        return result;
     }
 };
 
