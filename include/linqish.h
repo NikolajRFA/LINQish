@@ -14,6 +14,7 @@ private:
     std::list<T> data;
 
 public:
+    LINQish() {}
     LINQish(std::initializer_list<T> values) : data(values) {}
     LINQish(std::list<T> values) : data(values) {}
 
@@ -74,7 +75,7 @@ public:
         return true;
     }
 
-    T* first(const predicate_t<T> &predicate = nullptr)
+    T *first(const predicate_t<T> &predicate = nullptr)
     {
         if (!predicate)
         {
@@ -92,7 +93,7 @@ public:
         return nullptr;
     }
 
-    T* last(const predicate_t<T> &predicate = nullptr)
+    T *last(const predicate_t<T> &predicate = nullptr)
     {
         if (!predicate)
         {
@@ -108,6 +109,39 @@ public:
         }
 
         return nullptr;
+    }
+
+    LINQish<T> skip(int count)
+    {
+        LINQish<T> result;
+
+        auto it = data.begin();
+        for (int i = 0; i < count && it != data.end(); ++i)
+        {
+            ++it;
+        }
+
+        while (it != data.end())
+        {
+            result.data.push_back(*it);
+            ++it;
+        }
+
+        return result;
+    }
+
+    LINQish<T> take(int count)
+    {
+        LINQish<T> result;
+
+        auto it = data.begin();
+        for (int i = 0; i < count && it != data.end(); ++i)
+        {
+            result.data.push_back(*it);
+            ++it;
+        }
+
+        return result;
     }
 };
 
