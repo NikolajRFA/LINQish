@@ -1,5 +1,6 @@
 #ifndef LINQISH_H
 #define LINQISH_H
+#include <algorithm>
 
 template <typename T>
 using predicate_t = std::function<bool(const T &)>;
@@ -142,6 +143,12 @@ public:
         }
 
         return result;
+    }
+
+    T *min(const std::function<bool(const T &, const T &)> &comparer)
+    {
+        auto it = std::min_element(data.begin(), data.end(), comparer);
+        return (it != data.end()) ? &(*it) : nullptr;
     }
 };
 
