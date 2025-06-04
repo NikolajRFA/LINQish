@@ -154,8 +154,8 @@ public:
      *
      * @tparam T The type of elements in the list.
      * @param comparer A comparison function that determines ordering of elements.
-     *                 Should return `true` if the first argument is considered
-     *                 smaller than the second.
+     *                 Should return `true` if `a` argument is considered
+     *                 smaller than `b`.
      * @return T* Pointer to the minimum element, or `nullptr` if the list is empty.
      *
      * @note The comparison function should define a **strict weak ordering**
@@ -164,6 +164,28 @@ public:
     T *min(const std::function<bool(const T &, const T &)> &comparer)
     {
         auto it = std::min_element(data.begin(), data.end(), comparer);
+        return (it != data.end()) ? &(*it) : nullptr;
+    }
+
+    /**
+     * @brief Finds the maximum element in the list using a custom comparison function.
+     *
+     * This function uses `std::max_element` to determine the largest element
+     * based on the given `comparer` function. It returns a pointer to the found
+     * element or `nullptr` if the list is empty.
+     *
+     * @tparam T The type of elements in the list.
+     * @param comparer A comparison function that determines ordering of elements.
+     *                 Should return `true` if `b` argument is considered
+     *                 greater than `a`.
+     * @return T* Pointer to the maximum element, or `nullptr` if the list is empty.
+     *
+     * @note The comparison function should define a **strict weak ordering**
+     *       between elements for correct behavior.
+     */
+    T *max(const std::function<bool(const T &, const T &)> &comparer)
+    {
+        auto it = std::max_element(data.begin(), data.end(), comparer);
         return (it != data.end()) ? &(*it) : nullptr;
     }
 };
