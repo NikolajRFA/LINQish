@@ -35,11 +35,23 @@ void min_emptyListOfIntegers_nullptr()
     TEST_ASSERT_NULL(integer);
 }
 
+void min_listOfAnimals_youngestAnimal()
+{
+    LINQish<Animal> animals = { Animal("Sasu", "bird", 9), Animal("Kira", "bird", 9), Animal("Allan", "hamster", 2) };
+
+    auto animal = animals.min([](Animal a, Animal b) { return a.age < b.age; });
+
+    TEST_ASSERT_EQUAL_STRING("Allan", animal->name.c_str());
+    TEST_ASSERT_EQUAL_STRING("hamster", animal->species.c_str());
+    TEST_ASSERT_EQUAL_INT(2, animal->age);
+}
+
 int runUnityTests()
 {
     UNITY_BEGIN();
     RUN_TEST(min_listOfIntegers_smallestInteger);
     RUN_TEST(min_emptyListOfIntegers_nullptr);
+    RUN_TEST(min_listOfAnimals_youngestAnimal);
     return UNITY_END();
 }
 

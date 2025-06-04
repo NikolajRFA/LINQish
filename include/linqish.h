@@ -145,6 +145,22 @@ public:
         return result;
     }
 
+    /**
+     * @brief Finds the minimum element in the list using a custom comparison function.
+     *
+     * This function uses `std::min_element` to determine the smallest element
+     * based on the given `comparer` function. It returns a pointer to the found
+     * element or `nullptr` if the list is empty.
+     *
+     * @tparam T The type of elements in the list.
+     * @param comparer A comparison function that determines ordering of elements.
+     *                 Should return `true` if the first argument is considered
+     *                 smaller than the second.
+     * @return T* Pointer to the minimum element, or `nullptr` if the list is empty.
+     *
+     * @note The comparison function should define a **strict weak ordering**
+     *       between elements for correct behavior.
+     */
     T *min(const std::function<bool(const T &, const T &)> &comparer)
     {
         auto it = std::min_element(data.begin(), data.end(), comparer);
