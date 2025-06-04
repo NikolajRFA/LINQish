@@ -60,9 +60,6 @@ int runUnityTests()
     return UNITY_END();
 }
 
-/**
- * For Arduino framework
- */
 int main()
 {
     return runUnityTests();
