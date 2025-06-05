@@ -1,6 +1,7 @@
 #ifndef LINQISH_H
 #define LINQISH_H
 #include <algorithm>
+#include <functional>
 
 template <typename T>
 using predicate_t = std::function<bool(const T &)>;
@@ -187,6 +188,19 @@ public:
     {
         auto it = std::max_element(data.begin(), data.end(), comparer);
         return (it != data.end()) ? &(*it) : nullptr;
+    }
+
+    template <typename Container>
+    LINQish<T> &concat(const Container &values)
+    {
+        data.insert(data.end(), values.begin(), values.end());
+        return *this;
+    }
+
+    LINQish<T> &concat(std::initializer_list<T> values)
+    {
+        data.insert(data.end(), values.begin(), values.end());
+        return *this;
     }
 };
 
