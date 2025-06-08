@@ -190,6 +190,48 @@ public:
         return (it != data.end()) ? &(*it) : nullptr;
     }
 
+    /**
+     * @brief Finds the element with the minimum value based on a key selector function.
+     *
+     * This function applies `selector` to each element, then finds the element
+     * that produces the lowest value.
+     *
+     * @tparam TResult The type of the derived value used for comparison.
+     * @param selector Function that extracts the key for comparison.
+     * @return T* Pointer to the element with the minimum derived value, or nullptr if empty.
+     */
+    template <typename TResult>
+    T *minBy(const std::function<TResult(const T &)> &selector)
+    {
+        if (data.empty())
+            return nullptr;
+
+        return &(*std::min_element(data.begin(), data.end(),
+                                   [&](const T &a, const T &b)
+                                   { return selector(a) < selector(b); }));
+    }
+
+    /**
+     * @brief Finds the element with the maximum value based on a key selector function.
+     *
+     * This function applies `selector` to each element, then finds the element
+     * that produces the highest value.
+     *
+     * @tparam TResult The type of the derived value used for comparison.
+     * @param selector Function that extracts the key for comparison.
+     * @return T* Pointer to the element with the maximum derived value, or nullptr if empty.
+     */
+    template <typename TResult>
+    T *maxBy(const std::function<TResult(const T &)> &selector)
+    {
+        if (data.empty())
+            return nullptr;
+
+        return &(*std::max_element(data.begin(), data.end(),
+                                   [&](const T &a, const T &b)
+                                   { return selector(a) < selector(b); }));
+    }
+
     template <typename Container>
     LINQish<T> &concat(const Container &values)
     {
