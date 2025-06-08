@@ -146,6 +146,25 @@ public:
         return result;
     }
 
+    LINQish<T> &takeWhile(const predicate_t<T> &predicate)
+    {
+        std::list<T> result;
+        for (auto &item : data)
+        {
+            if (predicate(item))
+            {
+                result.push_back(item);
+            }
+            else
+            {
+                break;
+            }
+        }
+
+        data = result;
+        return *this;
+    }
+
     /**
      * @brief Finds the minimum element in the list using a custom comparison function.
      *
