@@ -2,6 +2,7 @@
 #define LINQISH_H
 #include <algorithm>
 #include <functional>
+#include <set>
 
 template <typename T>
 using predicate_t = std::function<bool(const T &)>;
@@ -281,6 +282,23 @@ public:
     LINQish<T> &concat(std::initializer_list<T> values)
     {
         data.insert(data.end(), values.begin(), values.end());
+        return *this;
+    }
+
+    LINQish<T> &distinct()
+    {
+        std::list<T> result;
+        std::set<T> seen;
+
+        for (const auto &item : data)
+        {
+            if (seen.insert(item).second)
+            {
+                result.push_back(item);
+            }
+        }
+
+        data = std::move(result);
         return *this;
     }
 };
