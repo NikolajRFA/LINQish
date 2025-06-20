@@ -25,6 +25,11 @@ public:
         return data;
     }
 
+    std::vector<T> toVector() const
+    {
+        return std::vector<T>(data.begin(), data.end());
+    }
+
     LINQish<T> filter(const predicate_t<T> &predicate)
     {
         std::list<T> result;
