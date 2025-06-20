@@ -1,0 +1,21 @@
+{
+  "name": "LINQish",
+  "version": "0.0.1",
+  "description": "LINQish is a modern, expressive library that brings LINQ-style operations to C++ lists, allowing developers to write cleaner, more functional-style queries.",
+  "keywords": "functional, list, query, LINQ, fluent, transformation, mapping",
+  "repository":
+  {
+    "type": "git",
+    "url": "https://github.com/NikolajRFA/LINQish.git"
+  },
+  "authors":
+  [
+    {
+      "name": "Nikolaj Andersen",
+      "maintainer": true
+    }
+  ],
+  "license": "Apache-2.0",
+  "frameworks": "arduino",
+  "platforms": "*"
+}
