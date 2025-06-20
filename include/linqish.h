@@ -170,6 +170,21 @@ public:
         return *this;
     }
 
+    LINQish<T> &skipWhile(const predicate_t<T> &predicate)
+    {
+        auto it = data.begin();
+
+        while (it != data.end() && predicate(*it))
+        {
+            ++it;
+        }
+
+        std::list<T> result(it, data.end());
+
+        data = result;
+        return *this;
+    }
+
     /**
      * @brief Finds the minimum element in the list using a custom comparison function.
      *
