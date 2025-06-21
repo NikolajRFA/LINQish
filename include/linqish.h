@@ -272,6 +272,23 @@ public:
                                    { return selector(a) < selector(b); }));
     }
 
+    bool contains(const T &value) const
+    {
+        return std::find(data.begin(), data.end(), value) != data.end();
+    }
+
+    bool contains(const predicate_t<T> &predicate) const
+    {
+        for (const auto &item : data)
+        {
+            if (predicate(item))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     template <typename Container>
     LINQish<T> &concat(const Container &values)
     {
