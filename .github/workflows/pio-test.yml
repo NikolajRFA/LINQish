@@ -7,5 +7,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Verify License Headers
+        run: .github/scripts/check_license.sh
+        
       - name: PlatformIO Test
         uses: NikolajRFA/platformio-test-action@v0.0.3
