@@ -15,7 +15,7 @@
 **/
 
 //
-// Created by nrfad on 09-06-2025.
+// Created by nrfad on 21-06-2025.
 //
 #include <list>
 #include "linqish.h"
