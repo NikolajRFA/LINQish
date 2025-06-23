@@ -47,7 +47,7 @@ public:
         return std::vector<T>(data.begin(), data.end());
     }
 
-    LINQish<T> filter(const predicate_t<T> &predicate)
+    LINQish<T> &filter(const predicate_t<T> &predicate)
     {
         std::list<T> result;
         for (const auto &item : data)
@@ -58,7 +58,8 @@ public:
             }
         }
 
-        return LINQish<T>(result);
+        data = std::move(result);
+        return *this;
     }
 
     template <typename TResult>
@@ -135,37 +136,30 @@ public:
         return nullptr;
     }
 
-    LINQish<T> skip(int count)
+    LINQish<T> &skip(int count)
     {
-        LINQish<T> result;
-
         auto it = data.begin();
         for (int i = 0; i < count && it != data.end(); ++i)
         {
             ++it;
         }
 
-        while (it != data.end())
-        {
-            result.data.push_back(*it);
-            ++it;
-        }
-
-        return result;
+        data = std::list<T>(it, data.end());
+        return *this;
     }
 
-    LINQish<T> take(int count)
+    LINQish<T> &take(int count)
     {
-        LINQish<T> result;
+        std::list<T> result;
 
         auto it = data.begin();
-        for (int i = 0; i < count && it != data.end(); ++i)
+        for (int i = 0; i < count && it != data.end(); ++i, ++it)
         {
-            result.data.push_back(*it);
-            ++it;
+            result.push_back(*it);
         }
 
-        return result;
+        data = std::move(result);
+        return *this;
     }
 
     LINQish<T> &takeWhile(const predicate_t<T> &predicate)
