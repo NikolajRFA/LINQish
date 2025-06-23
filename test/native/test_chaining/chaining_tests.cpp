@@ -1,0 +1,219 @@
+/*
+ Copyright (c) 2025-present Nikolaj Andersen
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+    https://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+**/
+
+//
+// Created by nrfad on 23-06-2025.
+//
+#include <list>
+#include "linqish.h"
+#include "unity.h"
+#include "../../animal.hpp"
+
+void setUp()
+{
+    // Setup code (if needed)
+}
+
+void tearDown()
+{
+    // Cleanup code (if needed)
+}
+
+void chaining_filterAndAny_true()
+{
+    LINQish<int> integers = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+
+    bool result = integers.filter([](const int &x)
+                                  { return x > 4; })
+                      .any([](const int &x)
+                           { return x == 9; });
+
+    TEST_ASSERT_TRUE(result);
+}
+
+void chaining_filterAndSkipWhile_leavesRest()
+{
+    LINQish<int> integers = {1, 2, 3, 4, 5, 6, 7, 10, 11, 12};
+
+    std::list<int> result = integers.filter([](const int &x)
+                                            { return x > 4; })
+                                .skipWhile([](const int &x)
+                                           { return x < 10; })
+                                .toList();
+
+    TEST_ASSERT_EQUAL_INT(3, result.size());
+    for (int i = 10; i < 12; i++)
+    {
+        TEST_ASSERT_EQUAL_INT(i, result.front());
+        result.pop_front();
+    }
+}
+
+void chaining_filterTakeSkip_expectedOrder()
+{
+    LINQish<int> numbers = {1, 2, 3, 4, 5, 6};
+
+    numbers
+        .filter([](int x)
+                { return x % 2 == 0; }) // Keep evens: 2, 4, 6
+        .skip(1)                        // Skip 2 → 4, 6
+        .take(1);                       // Take 4
+
+    auto result = numbers.toList();
+    std::list<int> expected = {4};
+
+    TEST_ASSERT_EQUAL_INT(expected.size(), result.size());
+
+    auto it1 = expected.begin();
+    auto it2 = result.begin();
+    while (it1 != expected.end())
+    {
+        TEST_ASSERT_EQUAL_INT(*it1, *it2);
+        ++it1;
+        ++it2;
+    }
+}
+
+void chaining_concatDistinctTakeWhile()
+{
+    LINQish<int> nums = {3, 1, 2, 3};
+
+    nums
+        .concat({4, 1, 5}) // → 3,1,2,3,4,1,5
+        .distinct()        // → 3,1,2,4,5
+        .takeWhile([](int x)
+                   { return x < 5; }); // → 3,1,2,4
+
+    std::list<int> expected = {3, 1, 2, 4};
+    auto result = nums.toList();
+
+    TEST_ASSERT_EQUAL_INT(expected.size(), result.size());
+
+    auto it1 = expected.begin();
+    auto it2 = result.begin();
+    while (it1 != expected.end())
+    {
+        TEST_ASSERT_EQUAL_INT(*it1, *it2);
+        ++it1;
+        ++it2;
+    }
+}
+
+void chaining_filterSkipWhileFirst()
+{
+    LINQish<int> nums = {1, 3, 5, 6, 7, 8, 10};
+
+    nums
+        .filter([](int x)
+                { return x > 3; }) // → 5,6,7,8,10
+        .skipWhile([](int x)
+                   { return x < 7; }); // → 7,8,10
+
+    int *result = nums.first();
+    TEST_ASSERT_NOT_NULL(result);
+    TEST_ASSERT_EQUAL_INT(7, *result);
+}
+
+void chaining_filterMapDistinctTake()
+{
+    LINQish<int> nums = {1, 2, 2, 3, 4, 5, 5};
+
+    auto result = nums
+                      .filter([](int x)
+                              { return x > 2; }) // 3, 4, 5, 5
+                      .map<int>([](int x)
+                                { return x * 2; }) // 6, 8, 10, 10
+                      .distinct()                  // 6, 8, 10
+                      .take(2)                     // 6, 8
+                      .toList();
+
+    std::list<int> expected = {6, 8};
+
+    TEST_ASSERT_EQUAL_INT(expected.size(), result.size());
+    auto it1 = expected.begin();
+    auto it2 = result.begin();
+    while (it1 != expected.end())
+    {
+        TEST_ASSERT_EQUAL_INT(*it1, *it2);
+        ++it1;
+        ++it2;
+    }
+}
+
+void chaining_concatSkipTakeWhileAll()
+{
+    LINQish<int> nums = {1, 2, 3};
+
+    bool result = nums
+                      .concat({4, 5, 6, 7, 8})
+                      .skipWhile([](int x)
+                                 { return x < 5; }) // 5, 6, 7, 8
+                      .takeWhile([](int x)
+                                 { return x <= 7; }) // 5, 6, 7
+                      .all([](int x)
+                           { return x % 2 != 0 || x == 6; }); // true
+
+    TEST_ASSERT_TRUE(result);
+}
+
+void chaining_filterSkipConcatFirst()
+{
+    LINQish<std::string> words = {"apple", "banana", "avocado", "berry"};
+
+    std::string *result = words
+                              .filter([](const std::string &s)
+                                      { return s[0] == 'a'; }) // apple, avocado
+                              .skip(1)                         // avocado
+                              .concat({"apricot", "almond"})   // avocado, apricot, almond
+                              .first([](const std::string &s)
+                                     { return s.size() == 6; }); // almond
+
+    TEST_ASSERT_NOT_NULL(result);
+    TEST_ASSERT_EQUAL_STRING("almond", result->c_str());
+}
+
+void chaining_mapContains()
+{
+    LINQish<int> numbers = {1, 2, 3, 4};
+
+    bool result = numbers
+                      .map<std::string>([](int x)
+                                        { return std::to_string(x * 10); }) // "10", "20", "30", "40"
+                      .contains([](const std::string &s)
+                                { return s == "30"; });
+
+    TEST_ASSERT_TRUE(result);
+}
+
+int runUnityTests()
+{
+    UNITY_BEGIN();
+    RUN_TEST(chaining_filterAndAny_true);
+    RUN_TEST(chaining_filterAndSkipWhile_leavesRest);
+    RUN_TEST(chaining_filterTakeSkip_expectedOrder);
+    RUN_TEST(chaining_concatDistinctTakeWhile);
+    RUN_TEST(chaining_filterSkipWhileFirst);
+    RUN_TEST(chaining_filterMapDistinctTake);
+    RUN_TEST(chaining_concatSkipTakeWhileAll);
+    RUN_TEST(chaining_filterSkipConcatFirst);
+    RUN_TEST(chaining_mapContains);
+    return UNITY_END();
+}
+
+int main()
+{
+    return runUnityTests();
+}
