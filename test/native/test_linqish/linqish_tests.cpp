@@ -32,7 +32,7 @@ void tearDown()
     // Cleanup code (if needed)
 }
 
-void chaining_filterAndAny_true()
+void linqish_filterAndAny_true()
 {
     LINQish<int> integers = {1, 2, 3, 4, 5, 6, 7, 8, 9};
 
@@ -44,7 +44,7 @@ void chaining_filterAndAny_true()
     TEST_ASSERT_TRUE(result);
 }
 
-void chaining_filterAndSkipWhile_leavesRest()
+void linqish_filterAndSkipWhile_leavesRest()
 {
     LINQish<int> integers = {1, 2, 3, 4, 5, 6, 7, 10, 11, 12};
 
@@ -62,7 +62,7 @@ void chaining_filterAndSkipWhile_leavesRest()
     }
 }
 
-void chaining_filterTakeSkip_expectedOrder()
+void linqish_filterTakeSkip_expectedOrder()
 {
     LINQish<int> numbers = {1, 2, 3, 4, 5, 6};
 
@@ -87,7 +87,7 @@ void chaining_filterTakeSkip_expectedOrder()
     }
 }
 
-void chaining_concatDistinctTakeWhile()
+void linqish_concatDistinctTakeWhile()
 {
     LINQish<int> nums = {3, 1, 2, 3};
 
@@ -112,7 +112,7 @@ void chaining_concatDistinctTakeWhile()
     }
 }
 
-void chaining_filterSkipWhileFirst()
+void linqish_filterSkipWhileFirst()
 {
     LINQish<int> nums = {1, 3, 5, 6, 7, 8, 10};
 
@@ -127,7 +127,7 @@ void chaining_filterSkipWhileFirst()
     TEST_ASSERT_EQUAL_INT(7, *result);
 }
 
-void chaining_filterMapDistinctTake()
+void linqish_filterMapDistinctTake()
 {
     LINQish<int> nums = {1, 2, 2, 3, 4, 5, 5};
 
@@ -153,7 +153,7 @@ void chaining_filterMapDistinctTake()
     }
 }
 
-void chaining_concatSkipTakeWhileAll()
+void linqish_concatSkipTakeWhileAll()
 {
     LINQish<int> nums = {1, 2, 3};
 
@@ -169,7 +169,7 @@ void chaining_concatSkipTakeWhileAll()
     TEST_ASSERT_TRUE(result);
 }
 
-void chaining_filterSkipConcatFirst()
+void linqish_filterSkipConcatFirst()
 {
     LINQish<std::string> words = {"apple", "banana", "avocado", "berry"};
 
@@ -185,7 +185,7 @@ void chaining_filterSkipConcatFirst()
     TEST_ASSERT_EQUAL_STRING("almond", result->c_str());
 }
 
-void chaining_mapContains()
+void linqish_mapContains()
 {
     LINQish<int> numbers = {1, 2, 3, 4};
 
@@ -198,18 +198,69 @@ void chaining_mapContains()
     TEST_ASSERT_TRUE(result);
 }
 
+void linqish_filterBySpeciesAndTake_returnsExpectedAnimals()
+{
+    LINQish<Animal> animals = {
+        {"Kira", "bird", 3},
+        {"Sasu", "bird", 5},
+        {"Lulu", "dog", 4},
+        {"Mika", "dog", 6}};
+
+    animals
+        .filter([](const Animal &a)
+                { return a.species == "dog"; }) // Lulu, Mika
+        .take(1);                               // Lulu
+
+    auto result = animals.toList();
+    TEST_ASSERT_EQUAL_INT(1, result.size());
+    TEST_ASSERT_EQUAL_STRING("Lulu", result.front().name.c_str());
+}
+
+void linqish_mapToAges_anyOlderThanFive()
+{
+    LINQish<Animal> animals = {
+        {"Sasu", "bird", 5},
+        {"Allan", "hamster", 2},
+        {"Mika", "dog", 6}};
+
+    bool result = animals
+                      .map<int>([](const Animal &a)
+                                { return a.age; })
+                      .any([](int age)
+                           { return age > 5; }); // true (Mika)
+
+    TEST_ASSERT_TRUE(result);
+}
+
+void linqish_firstOlderThanFive_returnsCorrectAnimal()
+{
+    LINQish<Animal> animals = {
+        {"Kira", "bird", 3},
+        {"Lulu", "dog", 4},
+        {"Mika", "dog", 6}};
+
+    Animal *result = animals.first([](const Animal &a)
+                                   { return a.age > 5; });
+
+    TEST_ASSERT_NOT_NULL(result);
+    TEST_ASSERT_EQUAL_STRING("Mika", result->name.c_str());
+}
+
 int runUnityTests()
 {
     UNITY_BEGIN();
-    RUN_TEST(chaining_filterAndAny_true);
-    RUN_TEST(chaining_filterAndSkipWhile_leavesRest);
-    RUN_TEST(chaining_filterTakeSkip_expectedOrder);
-    RUN_TEST(chaining_concatDistinctTakeWhile);
-    RUN_TEST(chaining_filterSkipWhileFirst);
-    RUN_TEST(chaining_filterMapDistinctTake);
-    RUN_TEST(chaining_concatSkipTakeWhileAll);
-    RUN_TEST(chaining_filterSkipConcatFirst);
-    RUN_TEST(chaining_mapContains);
+    RUN_TEST(linqish_filterAndAny_true);
+    RUN_TEST(linqish_filterAndSkipWhile_leavesRest);
+    RUN_TEST(linqish_filterTakeSkip_expectedOrder);
+    RUN_TEST(linqish_concatDistinctTakeWhile);
+    RUN_TEST(linqish_filterSkipWhileFirst);
+    RUN_TEST(linqish_filterMapDistinctTake);
+    RUN_TEST(linqish_concatSkipTakeWhileAll);
+    RUN_TEST(linqish_filterSkipConcatFirst);
+    RUN_TEST(linqish_mapContains);
+    RUN_TEST(linqish_filterBySpeciesAndTake_returnsExpectedAnimals);
+    RUN_TEST(linqish_mapToAges_anyOlderThanFive);
+    RUN_TEST(linqish_firstOlderThanFive_returnsCorrectAnimal);
     return UNITY_END();
 }
 
