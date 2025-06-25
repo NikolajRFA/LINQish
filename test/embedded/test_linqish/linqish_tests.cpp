@@ -15,8 +15,9 @@
 **/
 
 //
-// Created by nrfad on 23-06-2025.
+// Created by nrfad on 26-06-2025.
 //
+#include "Arduino.h"
 #include "../../shared/linqish_tests.h"
 
 void setUp()
@@ -47,7 +48,11 @@ int runUnityTests()
     return UNITY_END();
 }
 
-int main()
+void setup()
 {
-    return runUnityTests();
+    delay(2000);
+
+    runUnityTests();
 }
+
+void loop() {}
