@@ -14,10 +14,23 @@
  limitations under the License.
 **/
 
+#ifndef LINQISH_TESTS
+#define LINQISH_TESTS
+
 #include <list>
 #include "linqish.h"
 #include "unity.h"
 #include "../animal.hpp"
+
+void setUp()
+{
+    // Optional setup before each test
+}
+
+void tearDown()
+{
+    // Optional cleanup after each test
+}
 
 void linqish_filterAndAny_true()
 {
@@ -232,3 +245,23 @@ void linqish_firstOlderThanFive_returnsCorrectAnimal()
     TEST_ASSERT_NOT_NULL(result);
     TEST_ASSERT_EQUAL_STRING("Mika", result->name.c_str());
 }
+
+int runUnityTests()
+{
+    UNITY_BEGIN();
+    RUN_TEST(linqish_filterAndAny_true);
+    RUN_TEST(linqish_filterAndSkipWhile_leavesRest);
+    RUN_TEST(linqish_filterTakeSkip_expectedOrder);
+    RUN_TEST(linqish_concatDistinctTakeWhile);
+    RUN_TEST(linqish_filterSkipWhileFirst);
+    RUN_TEST(linqish_filterMapDistinctTake);
+    RUN_TEST(linqish_concatSkipTakeWhileAll);
+    RUN_TEST(linqish_filterSkipConcatFirst);
+    RUN_TEST(linqish_mapContains);
+    RUN_TEST(linqish_filterBySpeciesAndTake_returnsExpectedAnimals);
+    RUN_TEST(linqish_mapToAges_anyOlderThanFive);
+    RUN_TEST(linqish_firstOlderThanFive_returnsCorrectAnimal);
+    return UNITY_END();
+}
+
+#endif // LINQISH_TESTS
