@@ -1,4 +1,4 @@
-﻿/*
+/*
  Copyright (c) 2025-present Nikolaj Andersen
 
  Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,11 +15,16 @@
 **/
 
 //
-// Created by nrfad on 16-05-2025.
+// Created by nrfad on 20-06-2025.
 //
-#include "../../shared/filter_tests.h"
+#include <Arduino.h>
+#include "../../shared/distinct_tests.h"
 
-int main()
+void setup()
 {
-    return runUnityTests();
+    delay(2000);
+
+    runUnityTests();
 }
+
+void loop() {}

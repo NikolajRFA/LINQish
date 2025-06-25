@@ -20,34 +20,6 @@
 #include "Arduino.h"
 #include "../../shared/linqish_tests.h"
 
-void setUp()
-{
-    // Setup code (if needed)
-}
-
-void tearDown()
-{
-    // Cleanup code (if needed)
-}
-
-int runUnityTests()
-{
-    UNITY_BEGIN();
-    RUN_TEST(linqish_filterAndAny_true);
-    RUN_TEST(linqish_filterAndSkipWhile_leavesRest);
-    RUN_TEST(linqish_filterTakeSkip_expectedOrder);
-    RUN_TEST(linqish_concatDistinctTakeWhile);
-    RUN_TEST(linqish_filterSkipWhileFirst);
-    RUN_TEST(linqish_filterMapDistinctTake);
-    RUN_TEST(linqish_concatSkipTakeWhileAll);
-    RUN_TEST(linqish_filterSkipConcatFirst);
-    RUN_TEST(linqish_mapContains);
-    RUN_TEST(linqish_filterBySpeciesAndTake_returnsExpectedAnimals);
-    RUN_TEST(linqish_mapToAges_anyOlderThanFive);
-    RUN_TEST(linqish_firstOlderThanFive_returnsCorrectAnimal);
-    return UNITY_END();
-}
-
 void setup()
 {
     delay(2000);
