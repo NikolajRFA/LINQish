@@ -19,6 +19,7 @@
 #include <algorithm>
 #include <functional>
 #include <set>
+#include <vector>
 
 template <typename T>
 using predicate_t = std::function<bool(const T &)>;
