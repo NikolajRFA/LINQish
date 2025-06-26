@@ -15,11 +15,16 @@
 **/
 
 //
-// Created by nrfad on 22-05-2025.
+// Created by nrfad on 26-06-2025.
 //
-#include "../../shared/all_tests.h"
+#include <Arduino.h>
+#include "../../shared/any_tests.h"
 
-int main()
+void setup()
 {
-    return runUnityTests();
+    delay(2000);
+
+    runUnityTests();
 }
+
+void loop() {}
