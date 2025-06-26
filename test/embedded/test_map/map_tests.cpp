@@ -14,12 +14,17 @@
  limitations under the License.
 **/
 
+
 //
-// Created by nrfad on 16-05-2025.
+// Auto-generated embedded test runner
 //
+#include "Arduino.h"
 #include "../../shared/map_tests.h"
 
-int main()
+void setup()
 {
-    return runUnityTests();
+    delay(2000);
+    runUnityTests();
 }
+
+void loop() {}
