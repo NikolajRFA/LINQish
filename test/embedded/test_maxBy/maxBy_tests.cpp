@@ -14,12 +14,17 @@
  limitations under the License.
 **/
 
+
 //
-// Created by nrfad on 08-06-2025.
+// Auto-generated embedded test runner
 //
+#include "Arduino.h"
 #include "../../shared/maxBy_tests.h"
 
-int main()
+void setup()
 {
-    return runUnityTests();
+    delay(2000);
+    runUnityTests();
 }
+
+void loop() {}
