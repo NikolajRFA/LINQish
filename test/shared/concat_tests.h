@@ -94,10 +94,4 @@ int runUnityTests()
     return UNITY_END();
 }
 
-int runUnityTests()
-{
-    UNITY_BEGIN();
-    return UNITY_END();
-}
-
 #endif // CONCAT_TESTS
