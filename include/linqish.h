@@ -37,6 +37,7 @@ public:
     LINQish() {}
     LINQish(std::initializer_list<T> values) : data(values) {}
     LINQish(std::list<T> values) : data(values) {}
+    LINQish(const LINQish<T> &other) : data(other.data) {}
 
     std::list<T> toList()
     {
