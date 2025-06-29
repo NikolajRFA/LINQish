@@ -49,6 +49,11 @@ public:
         return std::vector<T>(data.begin(), data.end());
     }
 
+    int size()
+    {
+        return data.size();
+    }
+
     LINQish<T> &filter(const predicate_t<T> &predicate)
     {
         std::list<T> result;
