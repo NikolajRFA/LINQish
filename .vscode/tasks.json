@@ -1,0 +1,31 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Generate Test Runners",
+      "type": "shell",
+      "command": "./scripts/generate_test_runners.ps1",
+      "args": [
+        "-SharedTestPath", "test/shared/${input:sharedTestFile}"
+      ],
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      }
+    }
+  ],
+  "inputs": [
+    {
+      "id": "sharedTestFile",
+      "type": "promptString",
+      "description": "Enter the shared test file name (e.g. filter_tests.h)",
+    }
+  ]
+}
