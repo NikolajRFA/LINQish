@@ -32,7 +32,7 @@ void tearDown()
     // Cleanup code (if needed)
 }
 
-void any_listOfNumbers0to9_numberIsOver5IsTrue()
+void filter_listOfNumbers0to9_numberIsOver5IsTrue()
 {
     std::list<int> initList;
     for (int i = 0; i < 10; i++)
@@ -53,10 +53,27 @@ void any_listOfNumbers0to9_numberIsOver5IsTrue()
     TEST_ASSERT_EQUAL_INT(0, resultList.size());
 }
 
+void filter_listOfAnimals_birdsAreLeft()
+{
+    LINQish<Animal> animals = { Animal("Sasu", "bird" ,9), Animal("Kira", "bird", 9), Animal("Allan", "hamster", 2) };
+
+    auto filteredAnimals = animals.filter([](const Animal &animal) { return animal.species == "bird"; }).toList();
+
+    TEST_ASSERT_EQUAL_INT(2, filteredAnimals.size());
+    TEST_ASSERT_EQUAL_STRING("Sasu", filteredAnimals.front().name.c_str());
+    TEST_ASSERT_EQUAL_STRING("bird", filteredAnimals.front().species.c_str());
+    TEST_ASSERT_EQUAL_INT(9, filteredAnimals.front().age);
+    filteredAnimals.pop_front();
+    TEST_ASSERT_EQUAL_STRING("Kira", filteredAnimals.front().name.c_str());
+    TEST_ASSERT_EQUAL_STRING("bird", filteredAnimals.front().species.c_str());
+    TEST_ASSERT_EQUAL_INT(9, filteredAnimals.front().age);
+}
+
 int runUnityTests()
 {
     UNITY_BEGIN();
-    RUN_TEST(any_listOfNumbers0to9_numberIsOver5IsTrue);
+    RUN_TEST(filter_listOfNumbers0to9_numberIsOver5IsTrue);
+    RUN_TEST(filter_listOfAnimals_birdsAreLeft);
     return UNITY_END();
 }
 
