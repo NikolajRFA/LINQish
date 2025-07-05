@@ -335,6 +335,12 @@ public:
         data = std::move(result);
         return *this;
     }
+
+    LINQish<T> &reverse()
+    {
+        data.reverse();
+        return *this;
+    }
 };
 
 #endif // LINQISH_H
