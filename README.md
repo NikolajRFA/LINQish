@@ -13,20 +13,14 @@ LINQish is a **modern, expressive library** that brings LINQ-style operations to
 
 ```cpp
 #include "linqish.h"
-#include <iostream>
 
-int main() {
+std::list<int> filterAndMapNumbers()
+{
     LINQish<int> numbers = {1, 2, 3, 4, 5};
 
-    auto result = numbers.filter([](int x) { return x % 2 == 0; })
+    return numbers.filter([](int x) { return x % 2 == 0; })
                          .map([](int x) { return x * 10; })
                          .toList();
-
-    for (const auto& num : result) {
-        std::cout << num << " ";  // Output: 20 40
-    }
-
-    return 0;
 }
 ```
 ## 📦 Installation
