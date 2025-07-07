@@ -289,6 +289,16 @@ public:
                                    { return selector(a) < selector(b); }));
     }
 
+    int sum(const std::function<int(const T &)> &selector) const
+    {
+        int total = 0;
+        for (const auto &item : data)
+        {
+            total += selector(item);
+        }
+        return total;
+    }
+
     bool contains(const T &value) const
     {
         return std::find(data.begin(), data.end(), value) != data.end();
