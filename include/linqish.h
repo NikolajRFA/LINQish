@@ -289,14 +289,21 @@ public:
                                    { return selector(a) < selector(b); }));
     }
 
-    int sum(const std::function<int(const T &)> &selector) const
+    float sum(const std::function<float(const T &)> &selector) const
     {
-        int total = 0;
+        float total = 0;
         for (const auto &item : data)
         {
             total += selector(item);
         }
         return total;
+    }
+
+    float average(const std::function<float(const T &)> &selector) const
+    {
+        float total = this->sum(selector);
+
+        return total / data.size();
     }
 
     bool contains(const T &value) const
