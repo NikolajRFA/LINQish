@@ -53,6 +53,15 @@ void sum_emptyList_returnsZero()
     TEST_ASSERT_EQUAL_INT(0, total);
 }
 
+void sum_listOfFloats_sumOfFloats()
+{
+    LINQish<float> floats = { 2.5, 5.0 };
+
+    float total = floats.sum([](const float &x) { return x; });
+
+    TEST_ASSERT_EQUAL_FLOAT(7.5, total);
+}
+
 void sum_constantSelector_countsElements()
 {
     LINQish<std::string> names = {"Kira", "Sasu", "Lulu"};
@@ -81,6 +90,7 @@ int runUnityTests()
     UNITY_BEGIN();
     RUN_TEST(sum_listOfIntegers_sumOfList);
     RUN_TEST(sum_emptyList_returnsZero);
+    RUN_TEST(sum_listOfFloats_sumOfFloats);
     RUN_TEST(sum_constantSelector_countsElements);
     RUN_TEST(sum_animalsByAge_returnsTotalAge);
     return UNITY_END();
