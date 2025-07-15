@@ -69,11 +69,26 @@ void map_listOfAnimals_listOfPets()
     TEST_ASSERT_EQUAL_INT(0, petList.size());
 }
 
+void map_listOfFloats_flooredIntegers()
+{
+    LINQish<float> floats = { 1.1, 2.2, 3.3, 4.4, 5.5 };
+
+    auto integers = floats
+        .map<int>([](const float &x) { return floor(x); })
+        .toVector();
+
+    for (int i = 0; i < integers.size(); i++)
+    {
+        TEST_ASSERT_EQUAL_INT(i + 1, integers[i]);
+    }
+}
+
 int runUnityTests()
 {
     UNITY_BEGIN();
     RUN_TEST(map_listOfStrings_listOfSubstrings);
     RUN_TEST(map_listOfAnimals_listOfPets);
+    RUN_TEST(map_listOfFloats_flooredIntegers);
     return UNITY_END();
 }
 
