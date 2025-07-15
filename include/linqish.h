@@ -20,6 +20,7 @@
 #include <functional>
 #include <set>
 #include <vector>
+#include <list>
 
 template <typename T>
 using predicate_t = std::function<bool(const T &)>;
