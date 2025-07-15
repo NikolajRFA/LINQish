@@ -15,3 +15,11 @@ jobs:
 
       - name: PlatformIO Test
         uses: NikolajRFA/platformio-test-action@v0.0.3
+
+      - name: Build Examples
+        run: |
+          for folder in examples/*/
+          do
+            echo "Running CI for: $folder"
+            pio ci -l include --board upesy_wroom --board uno_r4_wifi --board pico "$folder"
+          done
