@@ -9,6 +9,7 @@ declare -A mappings=(
   ["name"]="name"
   ["license"]="license"
   ["repository.url"]="repository"
+  ["description"]="paragraph"
 )
 
 discrepancies=()
