@@ -19,7 +19,7 @@ std::list<int> filterAndMapNumbers()
     LINQish<int> numbers = {1, 2, 3, 4, 5};
 
     return numbers.filter([](int x) { return x % 2 == 0; })
-                         .map([](int x) { return x * 10; })
+                         .map<int>([](int x) { return x * 10; })
                          .toList();
 }
 ```
