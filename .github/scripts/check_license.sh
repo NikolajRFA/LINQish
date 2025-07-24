@@ -2,7 +2,7 @@
 set -e
 
 expected_header='Copyright (c) 2025-present Nikolaj Andersen'
-file_extensions=("*.cpp" "*.hpp" "*.h" "*.c")
+file_extensions=("*.cpp" "*.hpp" "*.h" "*.c" "*.ino")
 missing_files=()
 
 for ext in "${file_extensions[@]}"; do

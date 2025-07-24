@@ -13,5 +13,16 @@ jobs:
       - name: Verify License Headers
         run: chmod +x .github/scripts/check_license.sh && .github/scripts/check_license.sh
 
+      - name: Check Library Property Consistency
+        run: chmod +x .github/scripts/check_property_consistency.sh && .github/scripts/check_property_consistency.sh
+
       - name: PlatformIO Test
         uses: NikolajRFA/platformio-test-action@v0.0.3
+
+      - name: Build Examples
+        run: |
+          for folder in examples/*/
+          do
+            echo "Running CI for: $folder"
+            pio ci -l include --board upesy_wroom --board uno_r4_wifi --board pico "$folder"
+          done
