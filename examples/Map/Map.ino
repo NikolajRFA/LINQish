@@ -19,6 +19,7 @@
 
 void setup()
 {
+    Serial.begin(115200);
     LINQish<float> floats = { 1.1, 2.2, 3.3, 4.4, 5.5 };
 
     auto integers = floats
