@@ -122,6 +122,15 @@ public:
         return true;
     }
 
+    /**
+     * @brief Returns a pointer to the first element that satisfies the given predicate.
+     *
+     * If no predicate is provided, returns a pointer to the first element in the collection,
+     * or nullptr if the collection is empty.
+     *
+     * @param predicate A function that takes an element of type T and returns true if the element matches the desired condition.
+     * @return T* Pointer to the first matching element, or nullptr if none is found.
+     */
     T *first(const predicate_t<T> &predicate = nullptr)
     {
         if (!predicate)
@@ -140,6 +149,15 @@ public:
         return nullptr;
     }
 
+    /**
+     * @brief Returns a pointer to the last element that satisfies the given predicate.
+     *
+     * If no predicate is provided, returns a pointer to the last element in the collection,
+     * or nullptr if the collection is empty.
+     *
+     * @param predicate A function that takes an element of type T and returns true if the element matches the desired condition.
+     * @return T* Pointer to the last matching element, or nullptr if none is found.
+     */
     T *last(const predicate_t<T> &predicate = nullptr)
     {
         if (!predicate)
