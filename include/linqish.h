@@ -55,6 +55,14 @@ public:
         return data.size();
     }
 
+    /**
+     * @brief Filters the collection by applying the given predicate to each element.
+     *
+     * Removes elements that do not satisfy the predicate, modifying the current collection in-place.
+     *
+     * @param predicate A function that takes an element of type T and returns true if the element should be retained.
+     * @return LINQish<T>& Reference to the current collection after filtering.
+     */
     LINQish<T> &filter(const predicate_t<T> &predicate)
     {
         std::list<T> result;
@@ -70,6 +78,15 @@ public:
         return *this;
     }
 
+    /**
+     * @brief Projects each element of the collection into a new form using the mapper function.
+     *
+     * Creates a new collection containing the results of applying the mapper to each element.
+     *
+     * @tparam TResult The type of the resulting elements.
+     * @param mapper A function that transforms an element of type T into type TResult.
+     * @return LINQish<TResult> A new collection containing the mapped results.
+     */
     template <typename TResult>
     LINQish<TResult> map(const mapper_t<T, TResult> &mapper)
     {
