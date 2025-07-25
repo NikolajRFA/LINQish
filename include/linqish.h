@@ -40,16 +40,31 @@ public:
     LINQish(std::list<T> values) : data(values) {}
     LINQish(const LINQish<T> &other) : data(other.data) {}
 
+    /**
+     * @brief Converts the collection into a std::list of elements.
+     *
+     * @return std::list<T> A list containing all elements from the collection.
+     */
     std::list<T> toList()
     {
         return data;
     }
 
+    /**
+     * @brief Converts the collection into a std::vector of elements.
+     *
+     * @return std::vector<T> A vector containing all elements from the collection.
+     */
     std::vector<T> toVector() const
     {
         return std::vector<T>(data.begin(), data.end());
     }
 
+    /**
+     * @brief Returns the number of elements in the collection.
+     *
+     * @return int The size of the collection.
+     */
     int size()
     {
         return data.size();
