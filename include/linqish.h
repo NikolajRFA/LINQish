@@ -82,6 +82,13 @@ public:
         return LINQish<TResult>(result);
     }
 
+    /**
+     * @brief Determines whether any element in the collection satisfies the given predicate.
+     *
+     * @param predicate A function that takes an element of type T and returns true if the element matches the desired condition.
+     * @return true If at least one element satisfies the predicate.
+     * @return false If no elements satisfy the predicate.
+     */
     bool any(const predicate_t<T> &predicate)
     {
         for (const auto &item : data)
