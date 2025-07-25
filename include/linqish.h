@@ -102,6 +102,13 @@ public:
         return false;
     }
 
+    /**
+     * @brief Determines whether all elements in the collection satisfy the given predicate.
+     *
+     * @param predicate A function that takes an element of type T and returns true if the element matches the desired condition.
+     * @return true If every element satisfies the predicate.
+     * @return false If at least one element does not satisfy the predicate.
+     */
     bool all(const predicate_t<T> &predicate)
     {
         for (const auto &item : data)
