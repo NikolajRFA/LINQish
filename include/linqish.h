@@ -208,6 +208,14 @@ public:
         return nullptr;
     }
 
+    /**
+     * @brief Skips the specified number of elements from the beginning of the collection.
+     *
+     * Removes the first `count` elements, if available, modifying the collection in-place.
+     *
+     * @param count The number of elements to skip.
+     * @return LINQish<T>& Reference to the modified collection.
+     */
     LINQish<T> &skip(int count)
     {
         auto it = data.begin();
@@ -220,6 +228,14 @@ public:
         return *this;
     }
 
+    /**
+     * @brief Retains the specified number of elements from the beginning of the collection.
+     *
+     * Truncates the collection to the first `count` elements, modifying it in-place.
+     *
+     * @param count The number of elements to take.
+     * @return LINQish<T>& Reference to the modified collection.
+     */
     LINQish<T> &take(int count)
     {
         std::list<T> result;
@@ -234,6 +250,14 @@ public:
         return *this;
     }
 
+    /**
+     * @brief Retains elements from the beginning of the collection while the predicate is true.
+     *
+     * Iterates until the predicate fails, keeping only the matching initial segment.
+     *
+     * @param predicate A function that returns true while elements should be retained.
+     * @return LINQish<T>& Reference to the modified collection.
+     */
     LINQish<T> &takeWhile(const predicate_t<T> &predicate)
     {
         std::list<T> result;
@@ -253,6 +277,14 @@ public:
         return *this;
     }
 
+    /**
+     * @brief Skips elements from the beginning of the collection while the predicate is true.
+     *
+     * Iterates until the predicate fails, discarding the matching initial segment.
+     *
+     * @param predicate A function that returns true while elements should be skipped.
+     * @return LINQish<T>& Reference to the modified collection.
+     */
     LINQish<T> &skipWhile(const predicate_t<T> &predicate)
     {
         auto it = data.begin();
