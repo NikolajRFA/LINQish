@@ -35,9 +35,35 @@ private:
     std::list<T> data;
 
 public:
+    /**
+     * @brief Constructs an empty LINQish collection.
+     *
+     * Initializes the internal container with no elements.
+     */
     LINQish() {}
+    /**
+     * @brief Constructs a LINQish collection from an initializer list.
+     *
+     * Allows convenient creation using brace-enclosed values, e.g. LINQish<int>{1, 2, 3}.
+     *
+     * @param values The values to initialize the collection with.
+     */
     LINQish(std::initializer_list<T> values) : data(values) {}
+    /**
+     * @brief Constructs a LINQish collection from a std::list.
+     *
+     * Takes ownership of the provided list of elements.
+     *
+     * @param values A std::list containing the initial elements.
+     */
     LINQish(std::list<T> values) : data(values) {}
+    /**
+     * @brief Copy-constructs a LINQish collection from another instance.
+     *
+     * Creates a deep copy of the internal container from the provided LINQish object.
+     *
+     * @param other The LINQish object to copy from.
+     */
     LINQish(const LINQish<T> &other) : data(other.data) {}
 
     /**
