@@ -386,6 +386,14 @@ public:
                                    { return selector(a) < selector(b); }));
     }
 
+    /**
+     * @brief Computes the sum of values projected from each element using the provided selector.
+     *
+     * Applies the selector to each element and accumulates the result as a float.
+     *
+     * @param selector A function that extracts a float value from each element.
+     * @return float The total sum of projected values.
+     */
     float sum(const std::function<float(const T &)> &selector) const
     {
         float total = 0;
@@ -396,6 +404,15 @@ public:
         return total;
     }
 
+    /**
+     * @brief Computes the average of values projected from each element using the provided selector.
+     *
+     * Applies the selector to each element, sums the results, and divides by the number of elements.
+     * If the collection is empty, this will result in a divide-by-zero error.
+     *
+     * @param selector A function that extracts a float value from each element.
+     * @return float The average of projected values.
+     */
     float average(const std::function<float(const T &)> &selector) const
     {
         float total = this->sum(selector);
