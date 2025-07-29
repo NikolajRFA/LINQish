@@ -15,5 +15,5 @@
   ],
   "license": "Apache-2.0",
   "frameworks": "arduino",
-  "platforms": ["espressif32", "renesas-ra", "native"]
+  "platforms": ["espressif32", "renesas-ra", "raspberrypi", "native"]
 }
