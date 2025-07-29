@@ -487,6 +487,14 @@ public:
         return *this;
     }
 
+    /**
+     * @brief Removes duplicate elements from the collection.
+     *
+     * Preserves the original order while eliminating any repeated values.
+     * Elements are compared using their equality and ordering semantics via std::set.
+     *
+     * @return LINQish<T>& Reference to the modified LINQish object.
+     */
     LINQish<T> &distinct()
     {
         std::list<T> result;
@@ -504,6 +512,13 @@ public:
         return *this;
     }
 
+    /**
+     * @brief Reverses the order of elements in the collection.
+     *
+     * All elements are reordered in-place to reflect the opposite sequence.
+     *
+     * @return LINQish<T>& Reference to the modified LINQish object.
+     */
     LINQish<T> &reverse()
     {
         data.reverse();
