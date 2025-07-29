@@ -1,6 +1,6 @@
-name: PlatformIO Test
+name: CI
 
-on: [push]
+on: [pull_request]
 
 jobs:
   build:
