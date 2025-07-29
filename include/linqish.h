@@ -22,9 +22,26 @@
 #include <vector>
 #include <list>
 
+/**
+ * @brief A functional predicate that evaluates a condition on an element.
+ *
+ * Typically used for filtering operations such as `where` or `contains`.
+ * Accepts a single element of type T and returns true or false based on a condition.
+ *
+ * @tparam T The element type to test.
+ */
 template <typename T>
 using predicate_t = std::function<bool(const T &)>;
 
+/**
+ * @brief A mapper function that transforms one type to another.
+ *
+ * Commonly used for projection and transformation methods such as `select`.
+ * Accepts a value of type TSource and produces a result of type TResult.
+ *
+ * @tparam TSource The input type to be transformed.
+ * @tparam TResult The output type produced by the transformation.
+ */
 template <typename TSource, typename TResult>
 using mapper_t = std::function<TResult(const TSource &)>;
 
