@@ -42,16 +42,6 @@ Then include the header file:
 | `first(predicate)` | Gets the first matching element |
 | `last(predicate)` | Gets the last matching element |
 
-## 🤝 Contributing
-
-We welcome contributions! If you would like to improve LINQish, follow these steps:
-
-1. Fork the repository.
-2. Create a new branch (`git checkout -b feature-branch`).
-3. Make your changes and commit them (`git commit -m "Description of changes"`).
-4. Push to your branch (`git push origin feature-branch`).
-5. Open a pull request and describe your changes.
-
 Feel free to open issues for bug reports, feature requests, or general improvements!
 
 ## 📜 License
