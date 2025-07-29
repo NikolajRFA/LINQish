@@ -28,6 +28,22 @@ using predicate_t = std::function<bool(const T &)>;
 template <typename TSource, typename TResult>
 using mapper_t = std::function<TResult(const TSource &)>;
 
+/**
+ * @brief A lightweight LINQ-style wrapper for std::list supporting fluent functional operations.
+ *
+ * Provides a variety of transformation, filtering, and aggregation methods inspired by LINQ, enabling
+ * a functional programming style in C++. The internal container maintains insertion order and supports
+ * dynamic query composition via method chaining.
+ *
+ * Common operations include:
+ * - Filtering with predicates
+ * - Aggregating values (e.g., sum, average)
+ * - Transforming or selecting subsets of data
+ * - Appending or combining collections
+ * - Removing duplicates, reversing order
+ *
+ * @tparam T The type of elements stored in the collection.
+ */
 template <typename T>
 class LINQish
 {
