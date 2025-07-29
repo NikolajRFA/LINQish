@@ -457,6 +457,15 @@ public:
         return false;
     }
 
+    /**
+     * @brief Appends elements from another container to the current collection.
+     *
+     * Inserts all elements from the provided container at the end of the current collection.
+     *
+     * @tparam Container A container type with compatible value_type and iterators.
+     * @param values The container whose elements will be concatenated.
+     * @return LINQish<T>& Reference to the modified LINQish object.
+     */
     template <typename Container>
     LINQish<T> &concat(const Container &values)
     {
@@ -464,6 +473,14 @@ public:
         return *this;
     }
 
+    /**
+     * @brief Appends elements from an initializer list to the current collection.
+     *
+     * Inserts all elements from the initializer list at the end of the current collection.
+     *
+     * @param values The initializer list to concatenate.
+     * @return LINQish<T>& Reference to the modified LINQish object.
+     */
     LINQish<T> &concat(std::initializer_list<T> values)
     {
         data.insert(data.end(), values.begin(), values.end());
