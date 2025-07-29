@@ -420,11 +420,31 @@ public:
         return total / data.size();
     }
 
+    /**
+     * @brief Checks whether the collection contains the specified value.
+     *
+     * Performs a linear search to determine if any element in the collection
+     * matches the given value using the equality operator.
+     *
+     * @param value The value to look for in the collection.
+     * @return true If the value exists in the collection.
+     * @return false Otherwise.
+     */
     bool contains(const T &value) const
     {
         return std::find(data.begin(), data.end(), value) != data.end();
     }
 
+    /**
+     * @brief Checks whether any element in the collection satisfies the predicate.
+     *
+     * Iterates through the collection and evaluates the predicate on each element.
+     * Returns true if the predicate returns true for any element.
+     *
+     * @param predicate A function that takes an element and returns a boolean.
+     * @return true If at least one element satisfies the predicate.
+     * @return false Otherwise.
+     */
     bool contains(const predicate_t<T> &predicate) const
     {
         for (const auto &item : data)
