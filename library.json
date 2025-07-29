@@ -1,6 +1,6 @@
 {
   "name": "LINQish",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "LINQish is a modern, expressive library that brings LINQ-style operations to C++ lists, allowing developers to write cleaner, more functional-style queries.",
   "keywords": "functional, list, query, LINQ, fluent, transformation, mapping",
   "repository": {
