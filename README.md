@@ -46,7 +46,6 @@ Feel free to open issues for bug reports, feature requests, or general improveme
 
 ## 📜 License
 
-This project is licensed under the **MIT License**. You are free to use, modify, and distribute it, provided that proper credit is given.
+This project is licensed under the **Apache License 2.0**. You are free to use, modify, and distribute this software, provided that you comply with the terms of the license, including providing proper attribution and including a copy of the license in any distribution.
 
-See the full license text in the [`LICENSE`](LICENSE) file.
-
+See the full license text in the `LICENSE` file.
